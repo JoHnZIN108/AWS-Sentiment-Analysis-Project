@@ -19,4 +19,7 @@ Infrastructure:
 
 The AWS CDK is used to define and deploy the infrastructure components, including Lambda functions, Kinesis Data Stream, EventBridge rules, and DynamoDB tables.
 
-This project leverages the AWS CDK bootstrapping, which means that the IAM roles and other required resources are automatically created and managed by CDK.
+# DynamoDB Table data screenshot to show result
+![image](https://github.com/user-attachments/assets/9c0502ae-849c-464a-81a4-da2a06e65e03)
+![image](https://github.com/user-attachments/assets/a7c99ffb-7cae-4ec5-9caa-b303f2258668)
+
