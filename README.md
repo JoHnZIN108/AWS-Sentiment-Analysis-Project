@@ -1,58 +1,22 @@
+# Overview
+This original project is a serveless solution designed to analyze the sentiment of YouTube video comments using AWS services. The project leverages AWS CDK (Cloud Development Kit) for Infrastructure as Code (IaC), making it easy to deploy and manage cloud resources. The architecture involves extracting comments from YouTube, processing them with AWS Comprehend for sentiment analysis, and storing the results in DynamoDB.This project is a sentiment analysis solution built using AWS services.
 
-# Welcome to your CDK Python project!
+I was inspired to work on this project because I wanted to accurately and numerically gauge public sentiment on the recent presidential debate. This is an original project that I designed and built.
 
-This is a blank project for CDK development with Python.
+# AWS Pipeline Architecture
+![image](https://github.com/user-attachments/assets/dd19dc85-32f1-4fc8-834a-030b18f2d2c3)
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+# How it Works
+The youtube_scraper_lambda.py Lambda function uses the YouTube Data API to fetch comments from a specified video.
+The function is triggered every 5 minutes by an EventBridge rule.
+Extracted comments are sent to an AWS Kinesis Data Stream.
 
-To manually create a virtualenv on MacOS and Linux:
+The comprehend_lambda.py Lambda function is triggered by new records in the Kinesis Data Stream.
+It processes each comment using AWS Comprehend to determine the sentiment.
+The sentiment analysis results are stored in an AWS DynamoDB table.
+Infrastructure:
 
-```
-$ python -m venv .venv
-```
+The AWS CDK is used to define and deploy the infrastructure components, including Lambda functions, Kinesis Data Stream, EventBridge rules, and DynamoDB tables.
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
-
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+This project leverages the AWS CDK bootstrapping, which means that the IAM roles and other required resources are automatically created and managed by CDK.
