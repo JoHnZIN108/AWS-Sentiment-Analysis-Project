@@ -3,7 +3,7 @@ import json
 import base64
 import os
 import uuid
-from decimal import Decimal  # Import Decimal
+from decimal import Decimal
 
 # Initialize AWS clients
 comprehend = boto3.client('comprehend')
